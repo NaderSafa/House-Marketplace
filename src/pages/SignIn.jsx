@@ -4,6 +4,9 @@ import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import { db } from '../firebase.config'
+
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false)
   const [formData, setFormData] = useState({ email: '', password: '' })
@@ -19,6 +22,26 @@ const SignIn = () => {
     })
   }
 
+  const onSubmit = async (e) => {
+    e.preventDefault()
+
+    try {
+      const auth = getAuth()
+
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      )
+
+      if (userCredential.user) {
+        navigate('/')
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <>
       <div className='pageContainer'>
@@ -26,7 +49,7 @@ const SignIn = () => {
           <p className='pageHeader'>Welcome Back!</p>
         </header>
 
-        <form>
+        <form onSubmit={onSubmit}>
           <input
             type='email'
             className='emailInput'
