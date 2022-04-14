@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 import { useNavigate } from 'react-router'
@@ -56,7 +57,15 @@ const SignUp = () => {
 
       navigate('/')
     } catch (error) {
-      console.log(error)
+      toast.error('Bad User Credintials', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     }
   }
 
@@ -104,10 +113,6 @@ const SignUp = () => {
               }}
             />
           </div>
-
-          <Link to='/forgot-password' className='forgotPasswordLink'>
-            Forgot Password
-          </Link>
 
           <div className='signInBar'>
             <p className='signInText'>Sign Up</p>

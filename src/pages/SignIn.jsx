@@ -1,9 +1,9 @@
+import { toast } from 'react-toastify'
 import { useState } from 'react'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
-
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { db } from '../firebase.config'
 
@@ -38,7 +38,15 @@ const SignIn = () => {
         navigate('/')
       }
     } catch (error) {
-      console.log(error)
+      toast.error('Bad User Credintials', {
+        position: 'top-right',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      })
     }
   }
 
