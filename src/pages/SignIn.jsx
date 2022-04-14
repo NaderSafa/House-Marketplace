@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router'
 import { Link } from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { db } from '../firebase.config'
+import OAuth from '../components/OAuth'
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -96,6 +97,8 @@ const SignIn = () => {
             </button>
           </div>
         </form>
+
+        <OAuth />
 
         <Link to='/sign-up' className='registerLink'>
           Sign Up Instead
